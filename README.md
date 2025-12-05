@@ -1,99 +1,98 @@
-# VARtime: A Multivariate Framework for Tail Risk Forecasting
+# VARtime: A Multivariate Framework for Tail Risk Forecasting 📉📈
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![R >= 4.0.0](https://img.shields.io/badge/R-%3E%3D%204.0.0-276DC3.svg)](https://www.r-project.org/)
+[![GitHub issues](https://img.shields.io/github/issues/rodherrera/VARtime.svg)](https://github.com/rodherrera/VARtime/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/rodherrera/VARtime.svg)](https://github.com/rodherrera/VARtime)
+[![Made with R](https://img.shields.io/badge/Made%20with-R-276DC3.svg)](https://www.r-project.org/)
 
 `VARtime` implements a multivariate dynamic framework for forecasting extreme financial risk.  
-The model integrates information from both extreme and non-extreme events and allows the inclusion of high-frequency realized measures—such as realized volatility, bipower variation, and semivariances—to better capture tail-risk dynamics.
+The model integrates information from both extreme and non-extreme events and incorporates high-frequency realized measures—such as realized volatility, bipower variation, and semivariances—to capture shifts in tail-risk dynamics with greater accuracy.
 
-This repository contains the R code required to estimate VARtime models and to replicate the empirical results of the accompanying research article:
+This repository contains the full R implementation used to estimate VARtime models, evaluate forecasting performance, and replicate the empirical results of the research article:
 
-**_VARtime: A Multivariate Framework for Tail Risk Forecasting_ (2025)**
+**Candia, C., Herrera, R., & Clements, A. (2025). _VARtime: A Multivariate Framework for Tail Risk Forecasting_. Submitted.**
 
 ---
 
-## Features
+## 🚀 Features
 
 - Multivariate tail-risk modeling using Weibull, Burr, or Pareto tail specifications  
 - Vector autoregressive tail-index dynamics  
 - Optional inclusion of realized measures:  
   - Realized volatility (RV)  
-  - Bipower variation (BPV) and jumps  
-  - Positive/negative semivariances  
-- One-step-ahead forecasting of Value at Risk (VaR) and Expected Shortfall (ES)  
-- Replication scripts for stock-market empirical applications  
+  - Bipower variation (BPV) and jump components  
+  - Positive and negative semivariances  
+- One-step-ahead forecasts of Value at Risk (VaR) and Expected Shortfall (ES)  
+- Full replication of empirical results for major U.S. technology stocks  
+- Construction of Model Confidence Sets (MCS) and scoring-function evaluations  
 
 ---
 
-## Installation
+## 🗂️ Repository Structure
 
-```r
-devtools::install_github("yourusername/VARtime")
-```
-
----
-
-## Basic Example
-
-```r
-library(VARtime)
-
-# Example dataset (placeholder)
-data("tech_returns")
-
-# Fit a VARtime model
-fit <- vartime_fit(
-  data     = tech_returns,
-  tail     = "burr",
-  realized = NULL   # options: "rv", "bj", "sv", "sv2"
-)
-
-summary(fit)
-```
+### **Main Estimation Folder** 📦  
+The core implementation of the VARtime framework is organized into four files:
 
 ---
 
-## Tail Risk Forecasting
-
-```r
-# Compute VaR and ES forecasts
-forecast <- vartime_forecast(fit, horizon = 1)
-
-forecast$VaR
-forecast$ES
-```
-
----
-
-## Using Realized Measures
-
-```r
-fit_rv <- vartime_fit(
-  data     = tech_returns,
-  tail     = "weibull",
-  realized = "rv"
-)
-```
+### **1. VARtime** (Main Script)
+- Loads return data and realized measures  
+- Splits the sample into in-sample and out-of-sample periods  
+- Estimates all VARtime specifications  
+- Runs VaR and ES accuracy tests  
+- Computes scoring-function evaluations  
+- Constructs the **Model Confidence Set (MCS)**  
+- Generates the main figure presented in the paper  
+- Includes the extended specification using bipower variation and jump components under a Pareto tail  
 
 ---
 
-## Reproducibility
+### **2. filter.arma**
+- Implements a first-order autoregressive mechanism  
+- Governs the evolution of multivariate tail losses  
+- Captures persistence and cross-asset spillovers in extremes  
+
+---
+
+### **3. Likelihood**
+- Contains the joint likelihood function used for parameter estimation  
+- Supports all tail specifications (Weibull, Burr, Pareto)  
+- Computes standard errors for all estimated parameters  
+
+---
+
+### **4. Accuracy Tests**
+- Implements backtesting procedures for **VaR** and **ES**  
+- Includes strictly consistent scoring functions  
+- Implements regression-based ES tests (ERS, sCC, iERS, etc.)
+
+---
+
+### **Plots Folder** 🖼️  
+Contains scripts that reproduce the figures used in the paper, including the main comparative forecasting figure also produced in the VARtime script.
+
+---
+
+## 🔁 Reproducibility
 
 This repository includes:
 
 - Model estimation functions  
 - Forecasting utilities  
-- Scripts to replicate empirical results from the VARtime article  
+- Backtesting and scoring-function procedures  
+- Scripts to fully replicate the empirical analysis  
 
-More documentation will be added as the package evolves.
-
----
-
-## Citation
-
-If you use this code, please cite:
-
-**Herrera et al. (2025). _VARtime: A Multivariate Framework for Tail Risk Forecasting_.**
+Additional documentation will be added as the package evolves.
 
 ---
 
-## License
+## 📚 Citation
 
-MIT License © Your Name
+**Candia, C., Herrera, R., & Clements, A. (2025). _VARtime: A Multivariate Framework for Tail Risk Forecasting_. Submitted.**
+
+---
+
+## 📝 License
+
+MIT License © Rodrigo Herrera
