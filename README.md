@@ -1,6 +1,6 @@
 # VARtime: A Multivariate Framework for Tail Risk Forecasting 📉📈
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)
 [![R >= 4.0.0](https://img.shields.io/badge/R-%3E%3D%204.0.0-276DC3.svg)](https://www.r-project.org/)
 [![GitHub issues](https://img.shields.io/github/issues/rodherrera/VARtime.svg)](https://github.com/rodherrera/VARtime/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/rodherrera/VARtime.svg)](https://github.com/rodherrera/VARtime)
